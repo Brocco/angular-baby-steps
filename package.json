@@ -1,0 +1,30 @@
+{
+  "name": "angular-baby-steps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp",
+    "prestart": "npm run build",
+    "start": "http-server dist -p 3000 -c-1 -o"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brocco/angular-baby-steps.git"
+  },
+  "author": "Mike Brocchi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Brocco/angular-baby-steps/issues"
+  },
+  "homepage": "https://github.com/Brocco/angular-baby-steps#readme",
+  "dependencies": {
+    "angular": "^1.4.6",
+    "angular-ui-router": "^0.2.15"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "http-server": "^0.8.0"
+  }
+}

@@ -1,0 +1,36 @@
+<html ng-app="babySteps">
+<head>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+  <div class="outer" ng-controller="listManagerCtrl as listMgr">
+    <div class="left">
+      <h1>LISTS</h1>
+      <form ng-submit="listMgr.addList(listMgr.newListName)">
+        <input type="text" ng-model="listMgr.newListName" />
+        <button type="submit">Add New List</button>
+      </form>
+      <div ng-repeat="list in listMgr.lists track by $index"
+        ng-click="listMgr.selectList(list)"
+        ng-class="{'selected': listMgr.selectedList === list}">
+        {{ list.name }}
+      </div>
+    </div>
+    <div class="right">
+      <h1>ITEMS</h1>
+      <div ng-repeat="item in listMgr.selectedList.items track by item.id">
+        <input type="checkbox" ng-model="item.completed">
+        {{ item.name }}
+      </div>
+      <form ng-submit="listMgr.addItem(listMgr.newItemName)">
+        <input type="text" ng-model="listMgr.newItemName" />
+        <button type="submit">Add New List</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/lib.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

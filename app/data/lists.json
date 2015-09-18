@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Liquor",
+    "items": [
+      { "id": 1, "name": "Kettle One", "completed": false },
+      { "id": 2, "name": "Skyy", "completed": false },
+      { "id": 3, "name": "Smirnoff", "completed": false },
+      { "id": 4, "name": "Grey Goose", "completed": false },
+      { "id": 5, "name": "Jack Daniels", "completed": false },
+      { "id": 6, "name": "Jim Beam", "completed": false },
+      { "id": 7, "name": "Bacardi", "completed": false }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Wine",
+    "items": [
+      { "id": 1, "name": "Coppola", "completed": false },
+      { "id": 2, "name": "Mazzei", "completed": false },
+      { "id": 3, "name": "Umberto Caesari", "completed": false },
+      { "id": 4, "name": "Mad Dog 20/20", "completed": false },
+      { "id": 5, "name": "Boones Farm", "completed": false }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Beers",
+    "items": [
+      { "id": 1, "name": "Budweiser", "completed": false },
+      { "id": 2, "name": "Coors Light", "completed": false },
+      { "id": 3, "name": "Miller Light", "completed": false },
+      { "id": 4, "name": "Bud Light", "completed": false },
+      { "id": 5, "name": "Milwaukees Best", "completed": false },
+      { "id": 6, "name": "Natural Light", "completed": false }
+    ]
+  }
+]
