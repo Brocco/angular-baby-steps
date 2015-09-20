@@ -14,6 +14,33 @@ function ListService ($http, $q){
         return self.lists;
       });
   };
+  
+  this.getListById = function(id){
+    return this.getLists()
+      .then(function(response){
+        var data = response.data || response;
+        for(var i=0;i<data.length;i++){
+          if (data[i].id === parseInt(id)){
+            return data[i];
+          }
+        }
+        return undefined;
+      });
+  }
+  
+  this.toggleItem = function(item, listId){
+    //todo - figure why state doesn't persist.
+    return this.getListById(listId)
+      .then(function(list){
+        for(var i=0;i<list.items.length;i++){          
+          if (list.items[i].id === parseInt(item.id)){
+            list.items[i].completed = !list.items[i].completed;
+            return list.items[i];
+          }
+        }
+        return undefined;
+      });
+  }
 
   // add a new list
   this.addList = function(name) {

@@ -1,3 +1,122 @@
-.selected {
-  color: red;
+body{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6{
+  padding: 0 0 0 0 !important;
+  margin: 0 0 0 0 !important;
+}
+
+.outer{
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+}
+
+.left {
+  position:absolute;
+  top:0;
+  left:0;
+  width:20% !important;
+  height:100%;
+  overflow:auto;
+  border-right:5px solid #E6EEF5;
+  background-color:aliceblue;
+}
+
+.right {
+  position:absolute;
+  top:0;
+  right:0;
+  width:80% !important;
+  height:100%;
+  overflow:auto;
+}
+
+.container{
+  padding: 1em 1em;
+}
+
+.row {
+  height:24px !important;
+  padding:.5em .5em;
+}
+
+.float-left{
+  float:left;
+}
+
+.overlay-left{
+  position: absolute;
+  margin: -23px 4px;
+  cursor: pointer;
+  z-index: 10;
+  right: 24px;
+}
+
+.overlay-right{
+  position: absolute;
+  margin: 3px 0 0 -24px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.left divider{
+  display:block;
+  height:1px !important;
+  background-color: #E6EEF5;
+  margin: 15px 15px;
+}
+
+.left input[type=text]{
+  width:100%;
+  border-radius: 5px 5px;
+  border: 1px solid gray;
+  padding: 5px 5px;
+}
+
+.right input[type=text]{
+  border-radius: 5px 5px;
+  border: 1px solid gray;
+  padding: 5px 5px;
+  width:300px;
+}
+
+.upcase{
+  text-transform:uppercase;
+}
+
+.list-item {
+  font-family:inherit;
+  color: #46494D;
+  font-size:1em;
+  line-height:1em;
+  padding:1em 1em;
+  display:block;
+  text-decoration:none !important;
+}
+
+.list-item div{
+  margin-top:.3em;
+}
+
+.list-item:hover,.list-item.selected:hover{
+  background-color:#D3DCE3;
+  cursor:pointer;
+}
+
+.list-item.selected {
+  color: #252729;
+  background-color:#E6EEF5;
+}
+
+.list-item.selected ng-md-icon{
+  float:right;
+  margin-top:-1.3em;
+}
+
+.pointer{
+  cursor:pointer;
 }
