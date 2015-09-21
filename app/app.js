@@ -1,10 +1,30 @@
-var babySteps = angular.module('babySteps', ['ui.router']);
+var babySteps = angular.module('babySteps', ['ui.router','ngMdIcons']);
 
 babySteps.controller('listManagerCtrl', ListManagerController);
+babySteps.controller('listViewCtrl', ListViewController);
 babySteps.service('listService', ListService);
 
-// babySteps.config(function(){});
-
+babySteps.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise("/list/view/1");
+  
+  $stateProvider
+    .state('list', {
+      abstract:true,
+      url: '/list',
+      templateUrl: 'list/manager/layout.html',
+      controller: 'listManagerCtrl',
+      controllerAs: 'listMgr'
+    })
+    .state('list.view', {
+      url: '/view/:list',
+      templateUrl: 'list/view/view.html',
+      controller: 'listViewCtrl',
+      controllerAs: 'listViewCtrl'
+    });
+    
+}]);
+ 
+ 
 // checklist
 /*
 

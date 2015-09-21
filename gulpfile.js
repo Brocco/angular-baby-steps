@@ -36,3 +36,11 @@ gulp.task('data', function(){
   return gulp.src('app/data/*.json')
     .pipe(gulp.dest('dist/data'));
 });
+
+gulp.task('watch', ['default'], function(){
+  return gulp.watch([
+      'app/**/*.css',
+      'app/**/*.html',
+      'app/**/*.js'
+    ],['default']);
+});
