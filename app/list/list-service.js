@@ -1,58 +1,38 @@
-function ListService ($http, $q){
-  // keep an inner list (to mock a non-static API)
-  var lists;
+function ListService ($http){
+  var baseUrl = 'http://localhost:4444/list'
 
-  // get the list of lists
   this.getLists = function() {
-    if (lists){
-      return $q.when(lists);
-    }
-    var self = this;
-    return $http.get('data/lists.json')
+    return $http.get(baseUrl)
       .then(function(response){
-        self.lists = response.data;
-        return self.lists;
+        return response.data;
       });
   };
-  
+
   this.getListById = function(id){
-    return this.getLists()
-      .then(function(response){
-        var data = response.data || response;
-        for(var i=0;i<data.length;i++){
-          if (data[i].id === parseInt(id)){
-            return data[i];
-          }
-        }
-        return undefined;
-      });
-  }
-  
-  this.toggleItem = function(item, listId){
-    //todo - figure why state doesn't persist.
-    return this.getListById(listId)
-      .then(function(list){
-        for(var i=0;i<list.items.length;i++){          
-          if (list.items[i].id === parseInt(item.id)){
-            list.items[i].completed = !list.items[i].completed;
-            return list.items[i];
-          }
-        }
-        return undefined;
+    return $http.get(baseUrl + '/' + id)
+      .then(function(response) {
+        return response.data;
       });
   }
 
-  // add a new list
   this.addList = function(name) {
-    var newList = { id: this.lists.length + 1, name: name, items: [] };
-    this.lists.push(newList);
-    return $q.when(newList);
+    return $http.post(baseUrl, {name: name})
+      .then(function(response) {
+        return response.data;
+      });
   }
 
-  // add a new item
+  this.toggleItem = function(item, listId){
+    return $http.post(baseUrl + '/' + listId + '/item/' + item.id + '/toggle', {})
+      .then(function(response){
+        return response.data;
+      })
+  }
+
   this.addItem = function(list, name) {
-    var item = { id: list.length + 1, name: name, completed: false };
-    list.items.push(item);
-    return $q.when(item);
+    return $http.post(baseUrl + '/' + list.id + '/item', {name: name})
+      .then(function(response) {
+        return response.data;
+      });
   }
 }

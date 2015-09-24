@@ -4,19 +4,22 @@ function ListManagerController(listService, $state, $timeout) {
   this.listId = $state.params.list || 1;
   this.happyIcon = 'star';
   var self= this;
-  
+
   function init(){
-    
+
     listService.getLists()
       .then(function(lists) {
+        console.log('lists', lists);
         self.lists = lists;
+      }, function(err){
+        console.log('get lists error', err);
       });
-      
+
     listService.getListById(this.listId)
       .then(function(list){
         for(var i=0;i<self.lists.length;i++){
           if (self.lists[i].id === parseInt(self.listId)){
-            self.selectList(self.lists[i]); 
+            self.selectList(self.lists[i]);
           }
         }
       });
@@ -32,9 +35,9 @@ function ListManagerController(listService, $state, $timeout) {
          swapHappyIconSrc(t);
        },2000);
      }
-     swapHappyIconSrc(t);     
+     swapHappyIconSrc(t);
   }
-  
+
   // select a list
   this.selectList = function(list){
     this.selectedList = list;
@@ -44,7 +47,7 @@ function ListManagerController(listService, $state, $timeout) {
   this.addList = function(name){
     if (!name) { return; }
     listService.addList(name)
-      .then(function(newList) {        
+      .then(function(newList) {
         self.newListName = '';
         self.selectList(newList);
         self.lists.push(newList);
@@ -57,7 +60,7 @@ function ListManagerController(listService, $state, $timeout) {
         self.newItemName = '';
       });
   }
-  
+
   init();
-  
+
 }
