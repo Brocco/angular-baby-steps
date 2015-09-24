@@ -1,4 +1,4 @@
-var babySteps = angular.module('babySteps', ['ui.router','ngMdIcons']);
+var babySteps = angular.module('babySteps', ['ui.router']);
 
 babySteps.controller('listManagerCtrl', ListManagerController);
 babySteps.controller('listViewCtrl', ListViewController);
@@ -6,7 +6,7 @@ babySteps.service('listService', ListService);
 
 babySteps.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise("/list/view/1");
-  
+
   $stateProvider
     .state('list', {
       abstract:true,
@@ -21,10 +21,10 @@ babySteps.config(['$stateProvider','$urlRouterProvider',function($stateProvider,
       controller: 'listViewCtrl',
       controllerAs: 'listViewCtrl'
     });
-    
+
 }]);
- 
- 
+
+
 // checklist
 /*
 

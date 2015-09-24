@@ -23,19 +23,19 @@ function ListManagerController(listService, $state, $timeout) {
           }
         }
       });
-    var t;
-    var swapHappyIconSrc = function (t) {
-      if (t) $timeout.cancel(t);
-      t = $timeout(function () {
-        if (self.happyIcon === 'insert_emoticon') {
-          self.happyIcon = 'star';
-        } else {
-          self.happyIcon = 'insert_emoticon';
-        }
-        swapHappyIconSrc(t);
-      }, 2000);
-    }
-    swapHappyIconSrc(t);
+    // var t;
+    // var swapHappyIconSrc = function (t) {
+    //   if (t) $timeout.cancel(t);
+    //   t = $timeout(function () {
+    //     if (self.happyIcon === 'insert_emoticon') {
+    //       self.happyIcon = 'star';
+    //     } else {
+    //       self.happyIcon = 'insert_emoticon';
+    //     }
+    //     swapHappyIconSrc(t);
+    //   }, 2000);
+    // }
+    // swapHappyIconSrc(t);
   }
 
   // select a list
