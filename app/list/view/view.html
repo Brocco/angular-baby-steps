@@ -1,11 +1,10 @@
 <div class="right">
 	<div class="container">
-		<h1 class="upcase" ng-bind="listViewCtrl.currentList.name"></h1>
-		<div class="row" ng-repeat="item in listViewCtrl.currentList.items track by $index">
-			<ng-md-icon 
+		<div class="row" ng-repeat="item in listViewCtrl.items track by $index">
+			<ng-md-icon
 			class="pointer float-left"
 			icon="{{item.completed ? 'check_box' : 'check_box_outline_blank'}}"
-			ng-click="listViewCtrl.toggleItem(item)" 
+			ng-click="listViewCtrl.toggleItem(item)"
 			></ng-md-icon>
 			<span ng-bind="item.name"></span>
 		</div>
