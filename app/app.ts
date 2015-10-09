@@ -1,3 +1,6 @@
+import ListManagerController from './list/manager/list-manager-controller';
+import ListService from './list/list-service';
+
 var babySteps = angular.module('babySteps', ['ui.router']);
 
 babySteps.controller('listManagerCtrl', ListManagerController);
@@ -11,13 +14,13 @@ babySteps.config(['$stateProvider','$urlRouterProvider',function($stateProvider,
     .state('list', {
       abstract:true,
       url: '/list',
-      templateUrl: 'list/manager/layout.html',
+      templateUrl: 'views/layout.html',
       controller: 'listManagerCtrl',
       controllerAs: 'listMgr'
     })
     .state('list.view', {
       url: '/view/:list',
-      templateUrl: 'list/view/view.html',
+      templateUrl: 'views/view.html',
       controller: 'listViewCtrl',
       controllerAs: 'listViewCtrl'
     });

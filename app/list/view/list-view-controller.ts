@@ -1,25 +1,36 @@
-function ListViewController(listService, $stateParams) {
-  var self = this;
-  this.listId = $stateParams.list || 1;
+import ListService from '../list-service';
 
-  this.items = listService.getItems(this.listId)
-    .then(function (items) {
-      self.items = items;
-    });
+export default class ListViewController{
+  constructor(private listService: ListService,
+              private $stateParams: ng.ui.IStateService) {
+    this.init();
+  }
 
-  this.toggleItem = function (item) {
-    listService.toggleItem(item, this.listId)
-      .then(function (updatedItem) {
+  public listId = this.$stateParams['list'] || 1;
+  public items: any[];
+  public newItemName: string;
+
+  private init(){
+    this.listService.getItems(this.listId)
+      .then((items: any[]) => {
+        this.items = items;
+      });
+  }
+
+  public toggleItem (item) {
+    this.listService.toggleItem(item, this.listId)
+      .then((updatedItem: any) => {
         item.completed = updatedItem.completed;
       });
   }
 
-  this.addItem = function (name) {
+  public addItem (name) {
     if (!name) { return; }
-    listService.addItem(this.listId, name)
-      .then(function (newItem) {
-        self.newItemName = '';
-        self.items.push(newItem);
+
+    this.listService.addItem(this.listId, name)
+      .then((newItem) => {
+        this.newItemName = '';
+        this.items.push(newItem);
       });
   }
 }

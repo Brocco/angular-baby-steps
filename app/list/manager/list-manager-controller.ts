@@ -1,69 +1,54 @@
-function ListManagerController(listService, $state, $timeout) {
-  // placeholder for the lists (init to empty array)
-  this.lists = [];
-  this.listId = $state.params.list || 1;
-  this.happyIcon = 'star';
-  var self = this;
+import ListService from '../list-service';
 
-  function init() {
+export default class ListManagerController{
+  constructor(private listService: ListService,
+              private $state: ng.ui.IStateService,
+              private $timeout: ng.ITimeoutService) {
+    this.init();
+  }
 
-    listService.getLists()
-      .then(function (lists) {
+  public lists = [];
+  public listId: number = this.$state.params['list'] || 1;
+  public selectedList: any;
+  public newListName: string = '';
+
+  private init() {
+    this.listService.getLists()
+      .then((lists) => {
         console.log('lists', lists);
-        self.lists = lists;
+        this.lists = lists;
       }, function (err) {
         console.log('get lists error', err);
       });
 
-    listService.getListById(this.listId)
-      .then(function (list) {
-        for (var i = 0; i < self.lists.length; i++) {
-          if (self.lists[i].id === parseInt(self.listId)) {
-            self.selectList(self.lists[i]);
+    this.listService.getListById(this.listId)
+      .then((list) => {
+        for (var i = 0; i < this.lists.length; i++) {
+          if (this.lists[i].id === this.listId) {
+            this.selectList(this.lists[i]);
           }
         }
       });
-    // var t;
-    // var swapHappyIconSrc = function (t) {
-    //   if (t) $timeout.cancel(t);
-    //   t = $timeout(function () {
-    //     if (self.happyIcon === 'insert_emoticon') {
-    //       self.happyIcon = 'star';
-    //     } else {
-    //       self.happyIcon = 'insert_emoticon';
-    //     }
-    //     swapHappyIconSrc(t);
-    //   }, 2000);
-    // }
-    // swapHappyIconSrc(t);
   }
 
+
   // select a list
-  this.selectList = function (list) {
+  public selectList (list) {
     if (list !== this.selectedList) {
       this.selectedList = list;
-      $state.go('list.view', { list: list.id });
+      this.$state.go('list.view', { list: list.id });
     }
   }
 
   // add a new list
-  this.addList = function (name) {
+  public addList (name) {
     if (!name) { return; }
-    listService.addList(name)
-      .then(function (newList) {
-        self.newListName = '';
-        self.lists.push(newList);
-        self.selectList(newList);
+
+    this.listService.addList(name)
+      .then((newList) => {
+        this.newListName = '';
+        this.lists.push(newList);
+        this.selectList(newList);
       });
   }
-
-  this.addItem = function (name) {
-    listService.addItem(this.selectedList, name)
-      .then(function (newItem) {
-        self.newItemName = '';
-      });
-  }
-
-  init();
-
 }

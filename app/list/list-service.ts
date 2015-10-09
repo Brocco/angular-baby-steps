@@ -1,43 +1,45 @@
-function ListService($http) {
-  var baseUrl = 'http://localhost:4444/list'
+export default class ListService{
+  private baseUrl = 'http://localhost:4444/list';
 
-  this.getLists = function () {
-    return $http.get(baseUrl)
+  constructor(private $http: ng.IHttpService){}
+
+  public getLists(): ng.IPromise<any[]> {
+    return this.$http.get(this.baseUrl)
       .then(function (response) {
         return response.data;
       });
   };
 
-  this.getListById = function (id) {
-    return $http.get(baseUrl + '/' + id)
+  public getListById(id) {
+    return this.$http.get(this.baseUrl + '/' + id)
       .then(function (response) {
         return response.data;
       });
   }
 
-  this.getItems = function (listId) {
-    return $http.get(baseUrl + '/' + listId + '/item')
+  public getItems(listId) {
+    return this.$http.get(this.baseUrl + '/' + listId + '/item')
       .then(function (response) {
         return response.data;
       });
   }
 
-  this.addList = function (name) {
-    return $http.post(baseUrl, { name: name })
+  public addList(name) {
+    return this.$http.post(this.baseUrl, { name: name })
       .then(function (response) {
         return response.data;
       });
   }
 
-  this.toggleItem = function (item, listId) {
-    return $http.post(baseUrl + '/' + listId + '/item/' + item.id + '/toggle', {})
+  public toggleItem(item, listId) {
+    return this.$http.post(this.baseUrl + '/' + listId + '/item/' + item.id + '/toggle', {})
       .then(function (response) {
         return response.data;
       })
   }
 
-  this.addItem = function (listId, name) {
-    return $http.post(baseUrl + '/' + listId + '/item', { name: name })
+  public addItem(listId, name) {
+    return this.$http.post(this.baseUrl + '/' + listId + '/item', { name: name })
       .then(function (response) {
         return response.data;
       });
