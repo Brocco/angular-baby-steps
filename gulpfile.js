@@ -6,7 +6,7 @@ var jsLibs = [
   'node_modules/angular-ui-router/release/angular-ui-router.js'
 ];
 
-gulp.task('default', ['build-js', 'build-html', 'build-style', 'data'], function(){
+gulp.task('default', ['build-js', 'build-html', 'build-style'], function(){
 });
 
 gulp.task('build-js', ['build-lib-js'], function(){
@@ -30,11 +30,6 @@ gulp.task('build-style', function(){
   return gulp.src('app/**/*.css')
     .pipe(concat('site.css'))
     .pipe(gulp.dest('dist'));
-});
-
-gulp.task('data', function(){
-  return gulp.src('app/data/*.json')
-    .pipe(gulp.dest('dist/data'));
 });
 
 gulp.task('watch', ['default'], function(){

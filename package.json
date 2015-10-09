@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "gulp",
+    "build": "webpack -d -",
     "prestart": "npm run build",
     "start": "http-server dist -p 3000 -c-1 -o"
   },
@@ -23,9 +23,8 @@
     "angular-ui-router": "^0.2.15"
   },
   "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-concat": "^2.6.0",
-    "http-server": "^0.8.0",
-    "typescript": "^1.6.2"
+    "ts-loader": "^0.5.6",
+    "typescript": "^1.6.2",
+    "webpack": "^1.12.2"
   }
 }
