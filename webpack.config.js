@@ -1,9 +1,11 @@
+var exclude = /node_modules/;
+
 module.exports = {
   entry: [
-    './app/app.ts',
-    './app/index.html',
-    './app/list/manager/layout.html',
-    './app/list/view/view.html'
+    './app/app.ts'
+    // './app/index.html',
+    // './app/list/manager/layout.html',
+    // './app/list/view/view.html'
   ],
   output: {
     path: './dist/',
@@ -15,8 +17,9 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.ts$/, loader: 'ts-loader' },
-      { test: /\index.html$/, loader: 'file-loader?name=[name].[ext]' },
-      { test: /(?:[^index.html]*).html/, loader: 'file-loader?name=views/[name].[ext]' }
+      // { test: /\index.html$/, loader: 'file-loader?name=[name].[ext]' },
+      // { test: /(?:[^index.html]*).html/, loader: 'file-loader?name=views/[name].[ext]' }
+      {test: /\.html$/, loader: 'raw', exclude: exclude}
     ]
   }
 };

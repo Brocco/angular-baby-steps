@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack -d",
+    "postbuild": "cp ./app/index.html ./dist/ & cp ./app/site.css ./dist/",
     "prestart": "npm run build",
-    "start": "http-server dist -p 3000 -c-1 -o"
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -23,10 +24,10 @@
     "angular-ui-router": "^0.2.15"
   },
   "devDependencies": {
-    "file-loader": "^0.8.4",
     "raw-loader": "^0.5.1",
     "ts-loader": "^0.5.6",
     "typescript": "^1.6.2",
-    "webpack": "^1.12.2"
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.0"
   }
 }
