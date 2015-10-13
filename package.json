@@ -7,7 +7,7 @@
     "build": "webpack -d",
     "postbuild": "cp ./app/index.html ./dist/ & cp ./app/site.css ./dist/",
     "prestart": "npm run build",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server --content-base dist/"
   },
   "repository": {
     "type": "git",
