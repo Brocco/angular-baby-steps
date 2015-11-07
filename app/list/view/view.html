@@ -1,12 +1,7 @@
 <div class="right">
 	<div class="container">
 		<div class="row" ng-repeat="item in listViewCtrl.items track by $index">
-			<ng-md-icon
-			class="pointer float-left"
-			icon="{{item.completed ? 'check_box' : 'check_box_outline_blank'}}"
-			ng-click="listViewCtrl.toggleItem(item)"
-			></ng-md-icon>
-			<span ng-bind="item.name"></span>
+			<span ng-click="listViewCtrl.toggleItem(item)" ng-class="{'completed': item.completed}" ng-bind="item.name"></span>
 		</div>
 		<form ng-submit="listViewCtrl.addItem(listViewCtrl.newItemName)">
 			<input type="text" ng-model="listViewCtrl.newItemName" placeholder="add new item" />
