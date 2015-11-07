@@ -23,16 +23,3 @@ babySteps.config(['$stateProvider','$urlRouterProvider',function($stateProvider,
     });
 
 }]);
-
-
-// checklist
-/*
-
-navigation - nested route(s)
-controllers
-directive
-filter
-service/factory
-http/rest?
-
- */
