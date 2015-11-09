@@ -20,11 +20,14 @@
   },
   "homepage": "https://github.com/Brocco/angular-baby-steps#readme",
   "dependencies": {
-    "angular": "^1.4.6",
-    "angular-ui-router": "^0.2.15"
+    "angular2": " 2.0.0-alpha.45",
+    "@reactivex/rxjs": "5.0.0-alpha.4",
+    "reflect-metadata": "0.1.2",
+    "zone.js": "0.5.8"
   },
   "devDependencies": {
     "raw-loader": "^0.5.1",
+    "script-loader": "^0.6.1",
     "ts-loader": "^0.5.6",
     "typescript": "^1.6.2",
     "webpack": "^1.12.2",

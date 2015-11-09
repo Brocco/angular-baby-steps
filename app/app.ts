@@ -1,28 +1,27 @@
-import ListManagerDirective from './list/manager/list-manager-directive';
-import ListViewDirective from './list/view/list-view-directive';
-import ListService from './list/list-service';
+import {Component} from 'angular2/angular2';
+import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {HTTP_PROVIDERS} from 'angular2/http';
+import {ListManager} from './list/manager/list-manager';
 
-require('angular');
-require('angular-ui-router');
+import {provide, bootstrap} from 'angular2/angular2';
+import {ROUTER_PROVIDERS, HashLocationStrategy, LocationStrategy} from 'angular2/router';
 
-var babySteps = angular.module('babySteps', ['ui.router']);
+@Component({
+  selector: 'app',
+  template: `
+    <router-outlet></router-outlet>
+  `,
+  directives: [ROUTER_DIRECTIVES]
+})
+@RouteConfig([
+  { path: '/', as: 'ListManager', component: ListManager }
+])
+export default class App{
+  constructor() {}
+}
 
-babySteps.directive('listManager', ListManagerDirective);
-babySteps.directive('listView', ListViewDirective);
-babySteps.service('listService', ListService);
-
-babySteps.config(['$stateProvider','$urlRouterProvider',function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise("/list/view/1");
-
-  $stateProvider
-    .state('list', {
-      abstract:true,
-      url: '/list',
-      template: '<list-manager></list-manager>'
-    })
-    .state('list.view', {
-      url: '/view/:list',
-      template: '<list-view></list-view>'
-    });
-
-}]);
+bootstrap(App, [
+  ROUTER_PROVIDERS,
+  HTTP_PROVIDERS,
+	provide(LocationStrategy, {useClass: HashLocationStrategy})
+]);
