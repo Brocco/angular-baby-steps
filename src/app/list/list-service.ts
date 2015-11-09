@@ -8,8 +8,8 @@ export class ListService {
   constructor(private http: Http){}
 
   public getLists() {
-    // return this.http.get(this.baseUrl);
-      // .map(res => res.json());
+    return this.http.get(this.baseUrl)
+      .map(res => res.json());
   }
   // public getLists(): ng.IPromise<any[]> {
   //   return this.http.get(this.baseUrl)

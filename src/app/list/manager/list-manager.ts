@@ -30,21 +30,23 @@ import {ListService} from '../list-service';
     </div>
   `,
   directives: [NgFor],
-  // providers: [ListService]
+  providers: [ListService]
 })
 // @RouteConfig([
 //   // { path: '/:id', as: 'List', component: List}
 // ])
 export class ListManager{
-  constructor(){
-  // constructor(private listService: ListService){
+  constructor(private listService: ListService){
     console.log('list mgr ctor');
-    // console.log('listService', listService);
-    this.lists = [{id: 1, name: 'da name'}];
-    // this.listService.getLists()
-    //   .subscribe((x) => {
-    //     console.log('result', x);
-    //   });
+    console.log('listService', listService);
+    // this.lists = [{id: 1, name: 'da name'}];
+    this.listService.getLists()
+      .subscribe((x) => {
+        this.lists = x || [];
+        if (this.lists.length > 0) {
+          this.selectedList = this.lists[0];
+        }
+      });
   }
 
   public selectedList: any;
@@ -81,7 +83,7 @@ export class ListManager{
 
 
   // select a list
-  public selectList (list) {
+  public selectList (list: any) {
     if (list !== this.selectedList) {
       this.selectedList = list;
       // this.$state.go('list.view', { list: list.id });
