@@ -1,7 +1,7 @@
-import {Component, NgFor} from 'angular2/angular2';
-// import {RouteConfig, ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
+import {Component, NgFor, FORM_DIRECTIVES} from 'angular2/angular2';
+import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {ListService} from '../list-service';
-
+import {ListView} from '../view/list-view';
 
 @Component({
   selector: 'list-manager',
@@ -11,14 +11,14 @@ import {ListService} from '../list-service';
         <div class="container">
           <h1>LISTS</h1>
           <div class="row">
-            <form (submit)="addList(newListName)">
-            <input type="text" #newListName placeholder="add new list" />
+            <form (submit)="addList($event)">
+            <input type="text" [(ng-model)]="newListName" placeholder="add new list" />
               <button style="display:none;" type="submit">Add New List</button>
             </form>
           </div>
           <divider></divider>
           <a *ng-for="#list of lists"
-            ui-sref="list.view({list:list.id})"
+           [router-link]="['./ListView', {id: list.id}]"
             class="row list-item"
             [class.selected]="selectedList === list"
             (click)="selectList(list)">
@@ -26,23 +26,22 @@ import {ListService} from '../list-service';
           </a>
         </div>
       </div>
-      <!--<div ui-view></div>-->
+      <router-outlet></router-outlet>
     </div>
   `,
-  directives: [NgFor],
+  directives: [NgFor, ROUTER_DIRECTIVES, FORM_DIRECTIVES],
   providers: [ListService]
 })
-// @RouteConfig([
-//   // { path: '/:id', as: 'List', component: List}
-// ])
+@RouteConfig([
+  { path: '/list/:id', as: 'ListView', component: ListView}
+])
 export class ListManager{
-  constructor(private listService: ListService){
+  constructor(private listService: ListService, private router: Router){
     console.log('list mgr ctor');
     console.log('listService', listService);
-    // this.lists = [{id: 1, name: 'da name'}];
     this.listService.getLists()
-      .subscribe((x) => {
-        this.lists = x || [];
+      .subscribe((lists) => {
+        this.lists = lists || [];
         if (this.lists.length > 0) {
           this.selectedList = this.lists[0];
         }
@@ -51,55 +50,28 @@ export class ListManager{
 
   public selectedList: any;
   public lists: any[];
-
-  // constructor(private listService: ListService,
-  //             private $state: ng.ui.IStateService,
-  //             private $timeout: ng.ITimeoutService) {
-  //   this.init();
-  // }
-
-//   public lists = [];
-//   public listId: number = this.$state.params['list'] || 1;
-//   public newListName: string = '';
-
-//   private init() {
-//     this.listService.getLists()
-//       .then((lists) => {
-//         console.log('lists', lists);
-//         this.lists = lists;
-//       }, function (err) {
-//         console.log('get lists error', err);
-//       });
-
-//     this.listService.getListById(this.listId)
-//       .then((list) => {
-//         for (var i = 0; i < this.lists.length; i++) {
-//           if (this.lists[i].id === this.listId) {
-//             this.selectList(this.lists[i]);
-//           }
-//         }
-//       });
-//   }
+  public newListName: string;
 
 
   // select a list
   public selectList (list: any) {
     if (list !== this.selectedList) {
       this.selectedList = list;
-      // this.$state.go('list.view', { list: list.id });
+      this.router.navigate(['ListView', {id: list.id}]);
     }
   }
 
-//   // add a new list
-//   public addList (name) {
-//     if (!name) { return; }
+  // add a new list
+  public addList ($event) {
+    $event.preventDefault();
+    if (!this.newListName) { return; }
 
-//     this.listService.addList(name)
-//       .then((newList) => {
-//         this.newListName = '';
-//         this.lists.push(newList);
-//         this.selectList(newList);
-//       });
-//   }
+    this.listService.addList(this.newListName)
+      .subscribe((newList) => {
+        this.newListName = '';
+        this.lists.push(newList);
+        this.selectList(newList);
+      });
+  }
 
 }

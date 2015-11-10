@@ -1,4 +1,4 @@
-import {Http} from 'angular2/http';
+import {Http, Headers} from 'angular2/http';
 import {Injectable} from 'angular2/angular2';
 
 @Injectable()
@@ -11,45 +11,36 @@ export class ListService {
     return this.http.get(this.baseUrl)
       .map(res => res.json());
   }
-  // public getLists(): ng.IPromise<any[]> {
-  //   return this.http.get(this.baseUrl)
-  //     .then(function (response) {
-  //       return response.data;
-  //     });
-  // };
 
-  // public getListById(id) {
-  //   return this.http.get(this.baseUrl + '/' + id)
-  //     .then(function (response) {
-  //       return response.data;
-  //     });
-  // }
+  public getListById(id) {
+    return this.http.get(this.baseUrl + '/' + id)
+      .map(res => res.json());
+  }
 
-  // public getItems(listId) {
-  //   return this.http.get(this.baseUrl + '/' + listId + '/item')
-  //     .then(function (response) {
-  //       return response.data;
-  //     });
-  // }
+  public getItems(listId) {
+    return this.http.get(this.baseUrl + '/' + listId + '/item')
+      .map(res => res.json());
+  }
 
-  // public addList(name) {
-  //   return this.http.post(this.baseUrl, { name: name })
-  //     .then(function (response) {
-  //       return response.data;
-  //     });
-  // }
+  public addList(name) {
+    return this.http.post(
+      this.baseUrl,
+      JSON.stringify({ name: name }),
+      {headers: new Headers({'Content-Type': 'application/json'})})
+      .map(res => res.json());
+  }
 
-  // public toggleItem(item, listId) {
-  //   return this.http.post(this.baseUrl + '/' + listId + '/item/' + item.id + '/toggle', {})
-  //     .then(function (response) {
-  //       return response.data;
-  //     })
-  // }
+  public toggleItem(item, listId) {
+    return this.http.post(this.baseUrl + '/' + listId + '/item/' + item.id + '/toggle',
+      null,
+      {headers: new Headers({'Content-Type': 'application/json'})})
+      .map(res => res.json());
+  }
 
-  // public addItem(listId, name) {
-  //   return this.http.post(this.baseUrl + '/' + listId + '/item', { name: name })
-  //     .then(function (response) {
-  //       return response.data;
-  //     });
-  // }
+  public addItem(listId, name) {
+    return this.http.post(this.baseUrl + '/' + listId + '/item',
+      JSON.stringify({ name: name }),
+      {headers: new Headers({'Content-Type': 'application/json'})})
+      .map(res => res.json());
+  }
 }

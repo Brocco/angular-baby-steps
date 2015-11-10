@@ -14,7 +14,7 @@ import {ROUTER_PROVIDERS, HashLocationStrategy, LocationStrategy} from 'angular2
   directives: [ROUTER_DIRECTIVES]
 })
 @RouteConfig([
-  { path: '/', as: 'ListManager', component: ListManager }
+  { path: '/...', as: 'ListManager', component: ListManager }
 ])
 export default class App{
   constructor() {}
